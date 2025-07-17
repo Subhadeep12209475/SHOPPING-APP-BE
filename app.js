@@ -34,5 +34,5 @@ app.use("/api/v1/cart", cartRoutes);     // Cart API routes
 // ✅ Server Listen
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`-------- Server started on port ${PORT} --------`);
+    console.log(`-------- Server started on port ${PORT} -------`);
 });
