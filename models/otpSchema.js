@@ -22,7 +22,7 @@ const otpSchema = new Schema(
     }
 );
 
-// mongoose middleware
+
 otpSchema.pre("save", async function (next) {
     if (this.isModified("otp")) {
         this.otp = await bcrypt.hash(this.otp.toString(), 12);
@@ -30,7 +30,7 @@ otpSchema.pre("save", async function (next) {
     next();
 });
 
-// ---------- to run validators (every-time)
+
 otpSchema.pre("findByIdAndUpdate", function (next) {
     this.options.runValidators = true;
     next();

@@ -5,10 +5,10 @@ const attachJWTToken = (res, data) => {
 
     res.cookie("authorization", token, {
         maxAge: 1 * 24 * 60 * 60 * 1000,
-        secure: true, // only sent over https connections
-        sameSite: "None", // only our backend will get this cookie (no other backend can access it)
-        httpOnly: true, // frontend will not be able to read this cookie
-        // so that our token is out of reach of javascript --> hackers
+        secure: true, 
+        sameSite: "None", 
+        httpOnly: true, 
+        
     });
 };
 
@@ -18,10 +18,10 @@ const attachJWTToken = (res, data) => {
 const removeJWTToken = (res) => {
     res.cookie("authorization", "", {
         maxAge: 0,
-        secure: true, // only sent over https connections
-        sameSite: "None", // only our backend will get this cookie (no other backend can access it)
-        httpOnly: true, // frontend will not be able to read this cookie
-        // so that our token is out of reach of javascript --> hackers
+        secure: true, 
+        sameSite: "None", 
+        httpOnly: true, 
+        
     });
 };
 
@@ -32,7 +32,7 @@ const getUserIdFromToken = (token) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         if (decoded && decoded._id) {
-            return decoded._id; // Assuming your token payload has {_id: userId}
+            return decoded._id; 
         }
 
         throw new Error("Invalid token payload");

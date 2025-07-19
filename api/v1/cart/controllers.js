@@ -1,14 +1,13 @@
 const { Cart } = require('./model');
-const { getUserIdFromToken } = require('../../../utils/jwtHelpers')
+const { getUserIdFromToken } = require('../../../utils/jwtHelpers');
 
-// ✅ Add Item to Cart
 const addToCart = async (req, res) => {
     try {
         const token = req.cookies.authorization;
         const userId = getUserIdFromToken(token);
         const { item } = req.body;
 
-        item.userId = userId;  // Hardcoded for now (use real auth in future)
+        item.userId = userId;
 
         const savedItem = await Cart.create(item);
 
@@ -18,7 +17,6 @@ const addToCart = async (req, res) => {
     }
 };
 
-// ✅ Get All Cart Items
 const getCartItems = async (req, res) => {
     try {
         const token = req.cookies.authorization;
@@ -30,36 +28,16 @@ const getCartItems = async (req, res) => {
     }
 };
 
-// ✅ Remove Item from Cart
-// const removeFromCart = async (req, res) => {
-//     try {
-//         const { productId } = req.params;
-
-//         const result = await Cart.findOneAndDelete({
-//             productId,
-//             userId: "demoUser"
-//         });
-
-//         if (result) {
-//             res.json({ success: true, message: "Item removed." });
-//         } else {
-//             res.status(404).json({ success: false, message: "Item not found." });
-//         }
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: "Failed to remove item.", error: error.message });
-//     }
-// };
-
 const removeFromCart = async (req, res) => {
     try {
         const token = req.cookies.authorization;
-        const userId = getUserIdFromToken(token);  // ✅ Extract actual userId
+        const userId = getUserIdFromToken(token);
 
         const { productId } = req.params;
 
         const result = await Cart.findOneAndDelete({
             productId,
-            userId: userId   // ✅ Use correct userId
+            userId: userId
         });
 
         if (result) {
@@ -71,7 +49,6 @@ const removeFromCart = async (req, res) => {
         res.status(500).json({ success: false, message: "Failed to remove item.", error: error.message });
     }
 };
-
 
 module.exports = {
     addToCart,
