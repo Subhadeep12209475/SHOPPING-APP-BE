@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
-console.log(process.env.MONGO_DB_URI);
+console.log(process.env.MONGO_DB_URL);
 
 mongoose
-    .connect(process.env.MONGO_DB_URI, {
+    .connect(process.env.MONGO_DB_URL, {
         dbName: "backend-template-db",
     })
     .then(() => {
