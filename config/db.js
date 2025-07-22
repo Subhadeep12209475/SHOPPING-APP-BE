@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+console.log(process.env.MONGO_DB_URI);
+
 mongoose
     .connect(process.env.MONGO_DB_URI, {
         dbName: "backend-template-db",
